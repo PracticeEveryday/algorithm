@@ -402,7 +402,101 @@ function factorial(num){
     return num * factorial(num - 1)
 }
 
-console.log(factorial(1)) // 1
-console.log(factorial(2)) // 2
-console.log(factorial(4)) // 24
-console.log(factorial(7)) // 5040
+// console.log(factorial(1)) // 1
+// console.log(factorial(2)) // 2
+// console.log(factorial(4)) // 24
+// console.log(factorial(7)) // 5040
+
+
+function reserveRecursion(str) {
+    if(str.length <= 0) return str;
+
+    return str[str.length-1] + reserveRecursion(str.slice(0, str.length-1));
+}
+
+// console.log(reserve("abse"));
+// console.log(reserve("fbdsz"));
+// console.log(reserve("abcd"));
+
+
+function isPalindrome (str) {
+    if(str.length === 1) return true;
+    if(str.length === 2) return str[0] === str[1]
+
+    if(str[0] === str.slice(-1)) return isPalindrome(str.slice(1, -1));
+    return false;
+}
+// console.log(isPalindrome('abcecba'));
+
+// SAMPLE INPUT / OUTPUT
+const isOdd = val => val % 2 !== 0;
+
+
+
+function someRecursive(arr, fn){
+    // 배열의 단일 값이 콜백에 전달 될 때 true를 반환하면 true,
+    // 그렇지 않으면 false를 반환해라
+    if(arr.length === 0) return false;
+    if(fn(arr[0])) return true
+
+    return someRecursive(arr.slice(1), fn)
+}
+
+
+// console.log(someRecursive([1,2,3,4], isOdd)) // true
+// console.log(someRecursive([4,6,8,9], isOdd)) // true
+// console.log(someRecursive([4,6,8], isOdd)) // false
+// console.log(someRecursive([4,6,8], val => val > 10)) // false
+
+
+// TODO:
+function flatten(arr){
+
+}
+
+// console.log(flatten([1, 2, 3, [4, 5] ])) // [1, 2, 3, 4, 5]
+// console.log(flatten([1, [2, [3, 4], [[5]]]])) // [1, 2, 3, 4, 5]
+// console.log(flatten([[1],[2],[3]])) // [1,2,3]
+// console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])) // [1,2,3
+
+function capitalizeFirst (arr) {
+    if(arr.length === 0) return [];
+    const newArr = []
+    newArr.push(arr[0][0].toUpperCase() + arr[0].slice(1));
+    console.log('newArr', newArr)
+
+    // if(arr.slice(1).length === 0) return newArr;
+
+    return newArr.concat(capitalizeFirst(arr.slice(1)))
+}
+
+console.log(capitalizeFirst(['car','taco','banana'])); // ['Car','Taco','Banana']
+
+
+function nestedEvenSum () {
+    // add whatever parameters you deem necessary - good luck!
+}
+
+
+var obj1 = {
+    outer: 2,
+    obj: {
+        inner: 2,
+        otherObj: {
+            superInner: 2,
+            notANumber: true,
+            alsoNotANumber: "yup"
+        }
+    }
+}
+
+var obj2 = {
+    a: 2,
+    b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+    c: {c: {c: 2}, cc: 'ball', ccc: 5},
+    d: 1,
+    e: {e: {e: 2}, ee: 'car'}
+};
+
+console.log(nestedEvenSum(obj1)); // 6
+console.log(nestedEvenSum(obj2)); // 10
