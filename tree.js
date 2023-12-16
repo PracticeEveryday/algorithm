@@ -77,14 +77,94 @@ class BinarySearchTree {
             }
         }
     }
+
+    find(val) {
+        if(!this.root) return null;
+        let currentNode = this.root;
+        while (true) {
+            // 같으면 해당 노드를 반환한다.
+            if(currentNode.val === val) return currentNode;
+            if(val > currentNode.val && currentNode.right) {
+                currentNode = currentNode.right
+            } else if(val < currentNode.val && currentNode.left) {
+                currentNode = currentNode.left
+            } else {
+                return null
+            }
+        }
+    }
+
+    contains(val) {
+        if(!this.root) return false;
+        let currentNode = this.root;
+        while (true) {
+            // 같으면 해당 노드를 반환한다.
+            if (currentNode.val === val) return true;
+            if (val > currentNode.val && currentNode.right) {
+                currentNode = currentNode.right
+            } else if (val < currentNode.val && currentNode.left) {
+                currentNode = currentNode.left
+            } else {
+                return false
+            }
+        }
+    }
+
+    BFS() {
+        // root가 없으면 null을 반환한다.
+        if(!this.root) return null;
+
+        const queue = [this.root];
+        const visited = [];
+
+        // queue가 비어있을 때까지 순회한다.
+        while (queue.length !== 0) {
+            // queue가 들어 있다면 왼쪽 오른 쪽을 확인한다.
+            const current = queue.shift();
+
+            // 현재 확인해야 하는 값을 visited에 넣어준다.
+            visited.push(current.val);
+
+            if(current.left) queue.push(current.left);
+            if(current.right) queue.push(current.right);
+        }
+
+        return visited;
+    }
+
+    DFSProOrder() {
+        // root가 앖더면 비어 있는 트리로 null을 반화한다.
+        if(!this.root) return null;
+
+        // 노드를 방문하는 순서가들어 있는 변수
+        const data = [];
+
+        // current가 있는 이유는 사용자가 시작학 원하는 노드가 있을 수 있기 때문이다.
+        // 즉, 꼭 루트부터 순회하고 싶지 않을 수도 있기 떄문이다.
+        let current = this.root;
+        function traverse(node) {
+            // node의 값을 넣어주기
+            data.push(node.val);
+
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+
+        traverse(current);
+        return data;
+    }
 }
 
 const tree = new BinarySearchTree();
-tree.insert(1);
-tree.insert(2);
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
 tree.insert(3);
-tree.insert(4);
-tree.insert(4);
+tree.insert(8);
+tree.insert(20);
 
-console.log(tree)
+console.log(tree.BFS());
+console.log(tree.DFSProOrder());
+
+
 
