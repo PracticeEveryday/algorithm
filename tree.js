@@ -153,6 +153,40 @@ class BinarySearchTree {
         traverse(current);
         return data;
     }
+
+    DFSPostOrder() {
+        if(!this.root) return null;
+
+        const data = [];
+        let current = this.root;
+        function traverse(node) {
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+
+            // 돌 거 다 돌고 자기 자신을 넣는다!
+            // 즉, 왼쪽도 오른쪽도 없으면 자기 자신의 값을 data에 넣는다.
+            // 즉, 자식 노드가 없으면 자기 자신의 값을 data에 넣는 것이다!!
+            data.push(node.val);
+        }
+
+        traverse(this.root);
+        return data;
+    }
+
+    DFSInOrder() {
+        if(!this.root) return null;
+
+        const data = [];
+        let current = this.root;
+        function traverse(node) {
+            if(node.left) traverse(node.left);
+            data.push(node.val);
+            if(node.right) traverse(node.right);
+        }
+
+        traverse(this.root);
+        return data;
+    }
 }
 
 const tree = new BinarySearchTree();
@@ -165,6 +199,8 @@ tree.insert(20);
 
 console.log(tree.BFS());
 console.log(tree.DFSProOrder());
+console.log(tree.DFSPostOrder());
+console.log(tree.DFSInOrder());
 
 
 
