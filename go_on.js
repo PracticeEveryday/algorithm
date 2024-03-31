@@ -1,27 +1,40 @@
-function displayMobile() {
+function sleep(milliseconds) {
+  const start = new Date().getTime();
+  while (true) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+function watchYoutube() {
   console.log("유튜브 보는 중")
+  sleep(5000)
 }
 
-function displayWebtoon() {
+function watchWebtoon() {
   console.log("웹툰 보는 중")
+  sleep(5000)
 }
 
-function sleep() {
+function doze() {
   console.log("조는 중")
+  sleep(5000)
 }
 
-function do_something_else () {
-  setTimeout(displayMobile, 5000);
-  setTimeout(displayWebtoon, 10000);
-  setTimeout(sleep, 15000);
+function doSomethingElse () {
+  watchYoutube()
+  watchWebtoon()
+  doze()
 }
 
-function get_on_the_5528_bus() {
+function getOn5528Bus() {
   console.log("🚌🚌🚌🚌 낙성대 입구역 가는 중");
-  do_something_else();
   setTimeout(() => {
     console.log("낙성대 입구역 도착")
   }, 16000)
+  doSomethingElse();
 }
 
 
+getOn5528Bus()
